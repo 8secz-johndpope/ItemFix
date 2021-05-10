@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>ItemFixAPI</id>
+    <version>1.0.0.1</version>
+    <authors>BIGDummyHead</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">mitLicense.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <description>Allows you to search through ItemFix for information...</description>
+    <releaseNotes>Fixes problem with xpath to video node when post has '#''s in it</releaseNotes>
+    <copyright>© 2021 BIGDummyHead</copyright>
+    <repository type="API" url="https://github.com/BIGDummyHead/ItemFix" />
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="HtmlAgilityPack" version="1.11.33" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\shawn\Documents\GitHub\ItemFix\ItemFix-Sol\ItemFixAPI\bin\Debug\netcoreapp3.1\ItemFix.dll" target="lib\netcoreapp3.1\ItemFix.dll" />
+    <file src="C:\Users\shawn\Documents\GitHub\ItemFix\ItemFix-Sol\ItemFixAPI\bin\Debug\netcoreapp3.1\ItemFix.xml" target="lib\netcoreapp3.1\ItemFix.xml" />
+    <file src="C:\Users\shawn\source\mitLicense.txt" target="mitLicense.txt" />
+  </files>
+</package>

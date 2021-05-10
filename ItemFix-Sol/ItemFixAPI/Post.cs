@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,14 @@ namespace ItemFix
     /// </summary>
     public class Post
     {
-        private HtmlNode Main { get;  set; }
-        private HtmlNode DownloadNode { get;  set; }
-        private HtmlNode AuthorNode { get;  set; }
-        private HtmlNode Video_Node { get;  set; }
+        private HtmlNode Main { get; set; }
+        private HtmlNode DownloadNode { get; set; }
+        private HtmlNode Video_Node { get; set; }
+
+        /// <summary>
+        /// The url to this post
+        /// </summary>
+        public string URL { get; private set; }
 
         /// <summary>
         /// The <see cref="User"/> who uploaded this post
@@ -25,15 +30,55 @@ namespace ItemFix
         /// <summary>
         /// The name of the uploader
         /// </summary>
-        public string AuthorName => AuthorNode.InnerText;
+        private string back_name = string.Empty;
+        private bool checked_name = false;
+
+        /// <summary>
+        /// The name of the user
+        /// </summary>
+        public string AuthorName
+        {
+            get
+            {
+                if (!checked_name)
+                {
+                    HtmlNode node = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div");
+
+                    string ret = node.Descendants().FirstOrDefault(x => x.HasClass("itemfix-grids-views-con")).SelectSingleNode("span[1]/a")?.InnerText;
+
+                    if (!string.IsNullOrEmpty(ret))
+                    {
+                        int start = ret.IndexOf(" (");
+                        int end = ret.LastIndexOf(")");
+                        ret = ret.Remove(start);
+                    }
+
+                    back_name = ret;
+                    checked_name = true;
+
+                    return ret;
+                }
+
+                return back_name;
+            }
+        }
         /// <summary>
         /// The link to the author's page
         /// </summary>
-        public string AuthorLink => AuthorNode.GetAttributeValue("href", "");
+        public string AuthorLink => $"https://www.itemfix.com/c/{AuthorName}";
         /// <summary>
         /// a png to the author's pfp
         /// </summary>
-        public string AuthorPfpLink => Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div/div[1]/span[1]/img")?.GetAttributeValue("src", "");
+        public string AuthorPfpLink
+        {
+            get
+            {
+                HtmlNode node = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div");
+                string a = node.Descendants().FirstOrDefault(x => x.HasClass("itemfix-grids-views-con")).SelectSingleNode("span[1]/img")?.GetAttributeValue("src", "");
+
+                return a;
+            }
+        }
 
         /// <summary>
         /// The description
@@ -90,6 +135,7 @@ namespace ItemFix
 
         private void SetUp(string pstURL)
         {
+            URL = pstURL;
             string html = string.Empty;
             using (WebClient web = new WebClient())
             {
@@ -100,9 +146,9 @@ namespace ItemFix
             doc.LoadHtml(html);
 
             Main = doc.DocumentNode;
+
             DownloadNode = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[2]/ul/li[2]/a");
-            AuthorNode = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div/div[1]/span[1]/a");
-            Video_Node = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div/div[1]");
+            Video_Node = Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/div").Descendants().FirstOrDefault(x => x.HasClass("itemfix-grids-views-con"));
         }
 
         /// <summary>

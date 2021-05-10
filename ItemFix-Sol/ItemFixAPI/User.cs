@@ -37,6 +37,11 @@ namespace ItemFix
         /// </summary>
         public string PfpLink => Main.SelectSingleNode("/html/body/section/div/div/div[1]/div[1]/img")?.GetAttributeValue("src", "");
 
+        /// <summary>
+        /// the link to this user
+        /// </summary>
+        public string URL { get; private set; }
+
         internal User(string usrURL)
         {
             Setup(usrURL, false);
@@ -95,6 +100,7 @@ namespace ItemFix
 
         private void Setup(string usrURL, bool isUserToken)
         {
+            URL = usrURL;
             string html = string.Empty;
             using (WebClient client = new WebClient())
             {
@@ -127,8 +133,10 @@ namespace ItemFix
             UserToken = s.Remove(s.Length - z.GetNumCount());
         }
 
+       
+
         /// <summary>
-        /// Gives a specific page of the user via an ID
+        /// Gives a specific post of the user via an ID
         /// </summary>
         /// <param name="pg"></param>
         /// <returns></returns>

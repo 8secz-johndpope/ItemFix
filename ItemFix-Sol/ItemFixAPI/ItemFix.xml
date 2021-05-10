@@ -89,14 +89,24 @@
             A Post on ItemFix
             </summary>
         </member>
+        <member name="P:ItemFix.Post.URL">
+            <summary>
+            The url to this post
+            </summary>
+        </member>
         <member name="P:ItemFix.Post.Author">
             <summary>
             The <see cref="T:ItemFix.User"/> who uploaded this post
             </summary>
         </member>
-        <member name="P:ItemFix.Post.AuthorName">
+        <member name="F:ItemFix.Post.back_name">
             <summary>
             The name of the uploader
+            </summary>
+        </member>
+        <member name="P:ItemFix.Post.AuthorName">
+            <summary>
+            The name of the user
             </summary>
         </member>
         <member name="P:ItemFix.Post.AuthorLink">
@@ -311,6 +321,11 @@
             The direct link to the pfp file
             </summary>
         </member>
+        <member name="P:ItemFix.User.URL">
+            <summary>
+            the link to this user
+            </summary>
+        </member>
         <member name="M:ItemFix.User.#ctor(ItemFix.ItemID)">
             <summary>
             Get a <see cref="T:ItemFix.User"/> via <seealso cref="T:ItemFix.ItemID"/>
@@ -329,7 +344,7 @@
         </member>
         <member name="M:ItemFix.User.MoveTo(System.Int32)">
             <summary>
-            Gives a specific page of the user via an ID
+            Gives a specific post of the user via an ID
             </summary>
             <param name="pg"></param>
             <returns></returns>
