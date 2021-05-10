@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "Ku/AHuQnFnNjiaGXQ2eb44sBFhHTvklSsUNvb2c+hn/f/t5zcLpfxuk+szHg6U1EExFdpjwueGFEafD60XKkAw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\shawn\\Documents\\GitHub\\ItemFix\\ItemFix-Sol\\ItemFixAPI\\ItemFixAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\shawn\\.nuget\\packages\\htmlagilitypack\\1.11.33\\htmlagilitypack.1.11.33.nupkg.sha512"
+  ],
+  "logs": []
+}
